@@ -47,6 +47,7 @@
 @property (nonatomic,assign) CGRect retweeted_status_thumbnail_picViewF;
 
 @property (nonatomic,assign) CGRect bottomViewF;
+
 @property (assign,nonatomic)CGFloat cellHight;
 
 @property (strong,nonatomic)Status *status;

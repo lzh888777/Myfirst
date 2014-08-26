@@ -33,7 +33,7 @@
     
     CGFloat bottomViewX = topviewX;
     CGFloat bottomViewY = 0;
-    CGFloat bottomViewW = topViewW;
+    CGFloat bottomViewW = topViewW - StatusCellMargin;
     CGFloat bottomViewH = 35;
     
     CGFloat iconViewWH = 35;
@@ -111,9 +111,9 @@
  
     }
 
-    bottomViewY = topviewH;
+    bottomViewY = topviewH + StatusCellMargin;
     _bottomViewF = CGRectMake(bottomViewX, bottomViewY, bottomViewW, bottomViewH);
-    topviewH += bottomViewH ;
+    topviewH += bottomViewH+StatusCellMargin ;
     _topViewF = CGRectMake(topviewX, topviewY, topViewW, topviewH);
     _cellHight = topviewH + 2 *StatusCellMargin;
     

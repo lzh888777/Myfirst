@@ -34,6 +34,10 @@
  */
 @property (nonatomic, assign) int comments_count;
 /**
+ *  微博的评论数
+ */
+@property (nonatomic, assign) int attitudes_count;
+/**
  *  微博的作者
  */
 @property (nonatomic, strong) User *user;
