@@ -78,16 +78,16 @@
     }else{
         
         if (status.retweeted_status) {
-            CGFloat retweetViewW = cellW - 2*StatusCellBorder;
+            CGFloat retweetViewW = cellW - 2 * StatusCellBorder;
             CGFloat retweetViewX = textX;
             CGFloat retweetViewY = CGRectGetMaxY(_textF) + StatusCellBorder;
             CGFloat retweetViewH = 0;
             
-            CGFloat retweenContentViewX = StatusCellBorder;
+            CGFloat retweenContentViewX = 2 * StatusCellBorder;
             CGFloat retweenContentViewY = StatusCellBorder;
             NSString *content = [NSString stringWithFormat:@"@%@:%@",status.retweeted_status.user.name,status.retweeted_status.text];
             CGSize retweenContentViewSize = [content sizeWithFont:StatusNameFont constrainedToSize:CGSizeMake(retweetViewW, MAXFLOAT)];
-            _retweeted_status_contentLabelF = (CGRect){{retweenContentViewX,retweenContentViewY},retweenContentViewSize};
+            _retweeted_status_contentLabelF = (CGRect){{retweenContentViewX - 2 * StatusCellBorder,retweenContentViewY},retweenContentViewSize};
             retweetViewH = CGRectGetMaxY(_retweeted_status_contentLabelF) + StatusCellBorder;
             
 //            topviewH += CGRectGetMaxY(_retweeted_status_contentLabelF) ;
@@ -99,7 +99,7 @@
                 CGFloat retweeted_status_thumbnail_picViewWH = 80;
                 _retweeted_status_thumbnail_picViewF = CGRectMake(retweeted_status_thumbnail_picViewX, retweeted_status_thumbnail_picViewY, retweeted_status_thumbnail_picViewWH, retweeted_status_thumbnail_picViewWH);
                 
-//                topviewH += _retweeted_status_thumbnail_picViewF.size.height ;
+
                 
                 retweetViewH = CGRectGetMaxY(_retweeted_status_thumbnail_picViewF) + StatusCellBorder;
                 
@@ -113,9 +113,9 @@
 
     bottomViewY = topviewH;
     _bottomViewF = CGRectMake(bottomViewX, bottomViewY, bottomViewW, bottomViewH);
-    topviewH += bottomViewH;
+    topviewH += bottomViewH ;
     _topViewF = CGRectMake(topviewX, topviewY, topViewW, topviewH);
-    _cellHight = topviewH;
+    _cellHight = topviewH + 2 *StatusCellMargin;
     
 }
 

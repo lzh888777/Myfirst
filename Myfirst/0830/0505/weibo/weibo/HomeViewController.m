@@ -41,7 +41,7 @@
 
     [self setUpNavigationItem];
     self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 10, 0);
-    self.tableView.backgroundColor = [UIColor lightGrayColor];
+    self.tableView.backgroundColor = Color(226, 226, 226);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];

@@ -12,7 +12,11 @@
 #import "User.h"
 #import "UIImageView+WebCache.h"
 
+@interface StatusViewCell()
 
+@property (weak,nonatomic)UIView *dividerView;
+
+@end
 
 @implementation StatusViewCell
 
@@ -52,8 +56,8 @@
         
         
         UIImageView *retweeted_statusView = [[UIImageView alloc]init];
-        retweeted_statusView.image = [UIImage resizeImageWithName:@"common_card_middle_background"];
-        retweeted_statusView.highlightedImage = [UIImage resizeImageWithName:@"common_card_middle_background_highlighted"];
+        retweeted_statusView.image = [UIImage resizeImageWithName:@"timeline_retweet_background"];
+        retweeted_statusView.highlightedImage = [UIImage resizeImageWithName:@"timeline_retweet_background_highlighted"];
         [self.topView addSubview:retweeted_statusView];
         self.retweeted_statusView = retweeted_statusView;
         
@@ -64,6 +68,12 @@
         bottomView.highlightedImage = [UIImage resizeImageWithName:@"common_card_bottom_background_highlighted"];
         self.bottomView = bottomView;
         [self.contentView addSubview:bottomView];
+        
+        UIView * divider = [[UIView alloc]init];
+        divider.backgroundColor = [UIColor clearColor];
+        
+        [self.contentView addSubview:divider];
+        self.dividerView = divider;
     }
     return self;
 }
@@ -121,12 +131,17 @@
     
     frame.origin.x = StatusCellMargin;
     frame.origin.y += StatusCellMargin;
+    frame.size.height -= 2* StatusCellMargin;
     frame.size.width -= 2* StatusCellMargin;
-    frame.size.height -= StatusCellMargin;
+    
     [super setFrame:frame];
 }
 
 - (void)setStatusFrame:(StatusFrame *)statusFrame{
+    
+//    self.dividerView.frame = CGRectMake(0, 0, self.frame.size.width, 5);
+    
+    
     _statusFrame = statusFrame;
     self.topView.frame = statusFrame.topViewF;
     Status *status = statusFrame.status;
@@ -193,6 +208,8 @@
             self.retweeted_statusView.hidden = YES;
         }
     self.bottomView.frame = statusFrame.bottomViewF;
+    
+    
 }
 
 
