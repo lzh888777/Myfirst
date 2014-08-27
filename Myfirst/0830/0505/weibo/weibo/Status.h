@@ -13,7 +13,10 @@
 
 @property (nonatomic, copy) NSString *text;
 
-@property (nonatomic, copy) NSString *thumbnail_pic;
+//@property (nonatomic, copy) NSString *thumbnail_pic;
+
+@property (nonatomic,strong) NSArray *pic_urls;
+
 /**
  *  微博的来源
  */

@@ -21,8 +21,10 @@
     return frame;
 }
 
+
 - (void)setStatus:(Status *)status{
     _status = status;
+    
     
     CGFloat cellW = [UIScreen mainScreen].bounds.size.width - 2*StatusCellMargin;
     
@@ -68,13 +70,13 @@
     topviewH = CGRectGetMaxY(_textF);
     
     
-    if (status.thumbnail_pic) {
-        
-        CGFloat thumbnail_picX = textX;
-        CGFloat thumbnail_picY = CGRectGetMaxY(_textF) + StatusCellBorder;
-        CGFloat thumbnail_picWH = 70;
-        _thumbnail_picF = CGRectMake(thumbnail_picX, thumbnail_picY, thumbnail_picWH, thumbnail_picWH);
-        topviewH = CGRectGetMaxY(_thumbnail_picF);
+    if (status.pic_urls.count) {
+        CGFloat photoViewX = textX;
+        CGFloat photoViewY = CGRectGetMaxY(_textF) + StatusCellBorder;
+        CGFloat photoViewW = self.textF.size.width - StatusCellBorder;
+        CGFloat photoViewH = PhotoViewWH * ((status.pic_urls.count - 1) / 3 + 1);
+        _photoViewF = CGRectMake(photoViewX, photoViewY, photoViewW, photoViewH);
+        topviewH = CGRectGetMaxY(_photoViewF);
     }else{
         
         if (status.retweeted_status) {
@@ -92,16 +94,17 @@
             
 //            topviewH += CGRectGetMaxY(_retweeted_status_contentLabelF) ;
             
-            if (status.retweeted_status.thumbnail_pic) {
-                CGFloat retweeted_status_thumbnail_picViewX = retweenContentViewX;
-                CGFloat retweeted_status_thumbnail_picViewY = CGRectGetMaxY(_retweeted_status_contentLabelF) + StatusCellBorder;
+            if (status.retweeted_status.pic_urls.count) {
+                CGFloat retweeted_status_photoViewX = retweenContentViewX;
+                CGFloat retweeted_status_photoViewY = CGRectGetMaxY(_retweeted_status_contentLabelF) + StatusCellBorder;
                 
-                CGFloat retweeted_status_thumbnail_picViewWH = 80;
-                _retweeted_status_thumbnail_picViewF = CGRectMake(retweeted_status_thumbnail_picViewX, retweeted_status_thumbnail_picViewY, retweeted_status_thumbnail_picViewWH, retweeted_status_thumbnail_picViewWH);
+                CGFloat retweeted_status_photoViewW = self.retweeted_status_contentLabelF.size.width - 2 * StatusCellBorder;
+                CGFloat retweeted_status_photoViewH = PhotoViewWH * ((status.retweeted_status.pic_urls.count - 1) / 3 + 1);
+                _retweeted_status_photoViewF = CGRectMake(retweeted_status_photoViewX, retweeted_status_photoViewY, retweeted_status_photoViewW, retweeted_status_photoViewH);
                 
 
                 
-                retweetViewH = CGRectGetMaxY(_retweeted_status_thumbnail_picViewF) + StatusCellBorder;
+                retweetViewH = CGRectGetMaxY(_retweeted_status_photoViewF) + StatusCellBorder;
                 
             }
             

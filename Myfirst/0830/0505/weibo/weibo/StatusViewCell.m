@@ -19,32 +19,7 @@
 
 @property (weak,nonatomic) TopView *topView;
 
-
-/**
- *  微博的ID
- */
-//@property (nonatomic, weak) UILabel *idstr;
-/**
- *  微博的转发数
- */
-//@property (nonatomic, assign) int reposts_count;
-/**
- *  微博的评论数
- */
-//@property (nonatomic, assign) int comments_count;
-/**
- *  微博的作者
- */
-
-
-
-
-//@property (nonatomic,weak) UILabel *retweeted_status_nameLabel;
-
-
-
 @property (nonatomic,weak) BottomView *bottomView;
-
 
 
 @end
@@ -61,9 +36,6 @@
     
     cell.backgroundColor = [UIColor clearColor];
     return cell;
-    
-    
-    
 }
 
 
@@ -79,19 +51,15 @@
         self.selectedBackgroundView.backgroundColor = [UIColor clearColor];
         
         TopView *topView = [[TopView alloc]init];
-        
-
         [self.contentView addSubview:topView];
         self.topView = topView;
-        
-        
-        
-       
         
                
         BottomView *bottonView = [[BottomView alloc]init];
         self.bottomView = bottonView;
         [self.contentView addSubview:bottonView];
+        
+        
     }
     return self;
 }

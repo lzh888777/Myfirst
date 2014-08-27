@@ -11,12 +11,13 @@
 #import "Status.h"
 #import "User.h"
 #import "UIImageView+WebCache.h"
+#import "PhotoView.h"
 
 @interface RetweetedView ()
 
 @property (nonatomic,weak) UILabel *retweeted_status_contentLabel;
 
-@property (nonatomic,weak) UIImageView *retweeted_status_thumbnail_picView;
+@property (nonatomic,weak) PhotoView *retweeted_status_photoView;
 
 @end
 
@@ -28,6 +29,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.userInteractionEnabled = YES;
         self.image = [UIImage resizeImageWithName:@"timeline_retweet_background"];
         self.highlightedImage = [UIImage resizeImageWithName:@"timeline_retweet_background_highlighted"];
         
@@ -41,12 +43,13 @@
     
     UILabel *retweeted_status_contentLabel = [[UILabel alloc]init];
     
-    UIImageView *retweeted_status_thumbnail_picView = [[UIImageView alloc]init];
+    PhotoView *retweeted_status_photoView = [[PhotoView alloc]init];
+    
     
     [self addSubview:retweeted_status_contentLabel];
     self.retweeted_status_contentLabel = retweeted_status_contentLabel;
-    [self addSubview:retweeted_status_thumbnail_picView];
-    self.retweeted_status_thumbnail_picView = retweeted_status_thumbnail_picView;
+    [self addSubview:retweeted_status_photoView];
+    self.retweeted_status_photoView = retweeted_status_photoView;
 }
 
 -(void)setStatusFrame:(StatusFrame *)statusFrame{
@@ -62,12 +65,12 @@
         self.retweeted_status_contentLabel.text = [NSString stringWithFormat:@"@%@:%@",status.retweeted_status.user.name,status.retweeted_status.text];
         self.retweeted_status_contentLabel.frame = statusFrame.retweeted_status_contentLabelF;
         
-        if (status.retweeted_status.thumbnail_pic) {
-            self.retweeted_status_thumbnail_picView.hidden = NO;
-            self.retweeted_status_thumbnail_picView.frame = statusFrame.retweeted_status_thumbnail_picViewF;
-            [self.retweeted_status_thumbnail_picView setImageWithURL:[NSURL URLWithString:status.retweeted_status.thumbnail_pic] placeholderImage:[UIImage imageWithName:@"common_card_background"]];
+        if (status.retweeted_status.pic_urls.count) {
+            self.retweeted_status_photoView.hidden = NO;
+            self.retweeted_status_photoView.frame = statusFrame.retweeted_status_photoViewF;
+            [self.retweeted_status_photoView setPhotoViewWithStatusFrame:statusFrame status:status.retweeted_status];
         }else{
-            self.retweeted_status_thumbnail_picView.hidden = YES;
+            self.retweeted_status_photoView.hidden = YES;
         }
         
     }else{

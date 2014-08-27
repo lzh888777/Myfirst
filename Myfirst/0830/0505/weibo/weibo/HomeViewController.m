@@ -18,6 +18,7 @@
 #import "StatusFrame.h"
 #import "StatusViewCell.h"
 
+
 @interface HomeViewController ()
 
 @property (strong,nonatomic)NSArray *statusFrames;
@@ -25,6 +26,8 @@
 @end
 
 @implementation HomeViewController
+
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,12 +53,12 @@
     param[@"access_token"] = account.access_token;
     
     [mgr GET:@"https://api.weibo.com/2/statuses/home_timeline.json" parameters:param success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSArray *statusesArray = [Status objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         NSMutableArray *statusFrames = [NSMutableArray array];
         for (Status *status in statusesArray) {
             StatusFrame *frame = [StatusFrame statusFrameWithStatus:status];
-//            StatusFrame *frame = [[StatusFrame alloc]init];
-//            frame.status = status;
+  
             [statusFrames addObject:frame];
         }
         self.statusFrames = statusFrames;
@@ -124,6 +127,11 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     StatusFrame *frame = self.statusFrames[indexPath.row];
     return frame.cellHight;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

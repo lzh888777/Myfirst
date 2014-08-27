@@ -8,8 +8,14 @@
 
 #import "Status.h"
 #import "NSDate+ConpareDate.h"
+#import "MJExtension.h"
+#import "Photo.h"
 
 @implementation Status
+
+- (NSDictionary *)objectClassInArray{
+    return @{@"pic_urls": [Photo class]};
+}
 
 -(void)setSource:(NSString *)source{
     

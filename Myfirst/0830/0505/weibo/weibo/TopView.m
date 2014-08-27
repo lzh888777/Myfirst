@@ -12,10 +12,12 @@
 #import "User.h"
 #import "RetweetedView.h"
 #import "UIImageView+WebCache.h"
+#import "Photo.h"
+#import "PhotoView.h"
 
 @interface TopView ()
 
-@property (nonatomic, weak) UIImageView *thumbnail_picView;
+@property (nonatomic, weak) PhotoView *photoView;
 /**
  *  微博的来源
  */
@@ -59,7 +61,7 @@
 - (void)setUpUserInfo{
     UILabel *textLabel = [[UILabel alloc]init];
     
-    UIImageView *thumbnail_picView = [[UIImageView alloc]init];
+    PhotoView *photoView = [[PhotoView alloc]init];
     /**
      *  微博的来源
      */
@@ -89,8 +91,8 @@
     self.source = source;
     [self addSubview:textLabel];
     self.statusTextLabel = textLabel;
-    [self addSubview:thumbnail_picView];
-    self.thumbnail_picView = thumbnail_picView;
+    [self addSubview:photoView];
+    self.photoView = photoView;
 }
 
 - (void)setStatusFrame:(StatusFrame *)statusFrame{
@@ -134,12 +136,14 @@
     self.statusTextLabel.numberOfLines = 0;
     self.statusTextLabel.frame = statusFrame.textF;
     
-    if (status.thumbnail_pic) {
-        self.thumbnail_picView.hidden = NO;
-        self.thumbnail_picView.frame = statusFrame.thumbnail_picF;
-        [self.thumbnail_picView setImageWithURL:[NSURL URLWithString:status.thumbnail_pic] placeholderImage:[UIImage imageWithName:@"common_card_background"]];
+    if (status.pic_urls.count) {
+        self.photoView.hidden = NO;
+        self.photoView.frame = statusFrame.photoViewF;
+        [self.photoView setPhotoViewWithStatusFrame:statusFrame status:status];
+        
+        
     }else{
-        [self.thumbnail_picView setHidden:YES];
+        [self.photoView setHidden:YES];
     }
     
     self.retweeted_statusView.statusFrame = statusFrame;

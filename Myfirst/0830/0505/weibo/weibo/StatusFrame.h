@@ -13,6 +13,7 @@
 #define StatusTimeFont [UIFont systemFontOfSize:12]
 
 #define StatusCellMargin 5
+#define PhotoViewWH 70
 
 @class Status;
 
@@ -30,7 +31,7 @@
 
 @property (nonatomic, assign) CGRect textF;
 
-@property (nonatomic, assign) CGRect thumbnail_picF;
+@property (nonatomic, assign) CGRect photoViewF;
 /**
  *  微博的来源
  */
@@ -44,7 +45,7 @@
 
 @property (nonatomic,assign) CGRect retweeted_status_contentLabelF;
 
-@property (nonatomic,assign) CGRect retweeted_status_thumbnail_picViewF;
+@property (nonatomic,assign) CGRect retweeted_status_photoViewF;
 
 @property (nonatomic,assign) CGRect bottomViewF;
 
